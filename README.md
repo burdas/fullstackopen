@@ -7,3 +7,10 @@
 
     a. Información general
     b. Fundamentos de las aplicaciones web
+
+### [Part 1 - Introducción a React](https://fullstackopen.com/es/part1)
+
+    a. Introducción a React
+    b. JavaScript
+    c. Estado del componente, controladores de eventos
+    d. Un estado mas complejo, depurando aplicaciones de React
