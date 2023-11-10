@@ -3,13 +3,20 @@ import ReactDOM from 'react-dom'
 
 const App = () => {
   // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const [good, setGood] = useState(6)
+  const [neutral, setNeutral] = useState(2)
+  const [bad, setBad] = useState(1)
 
   return (
     <div>
-      code here
+      <h2>Give feedback</h2>
+      <button>Good</button>
+      <button>Neutral</button>
+      <button>Bad</button>
+      <h2>Statistics</h2>
+      <p>good {good}</p>
+      <p>neutral {neutral}</p>
+      <p>bad {bad}</p>
     </div>
   )
 }
