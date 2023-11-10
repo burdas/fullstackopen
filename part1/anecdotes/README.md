@@ -1,8 +1,28 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# UniCafe
 
-Currently, two official plugins are available:
+The world of software engineering is filled with anecdotes that distill timeless truths from our field into short one-liners.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* The aplication allows the user to generate a random anecdote.
+* The aplication allows the user to vote an anecdote
+* The aplication shows the most voted ancecdote
+
+The project was build with:
+
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![SWC Badge](https://img.shields.io/badge/SWC-000?logo=swc&logoColor=fff&style=for-the-badge)
+
+
+## Deployment
+
+To install all dependencies
+
+```bash
+  npm install
+```
+
+To deploy this project run
+
+```bash
+  npm run dev
+```
