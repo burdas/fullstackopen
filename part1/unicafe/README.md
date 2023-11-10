@@ -1,7 +1,7 @@
 
-# Course info
+# UniCafe
 
-A litte React exercise with a example to use Componentes and Props.
+React application to count good, neutral and bad comments. It also displays the statistics.
 
 The project was build with:
 
@@ -22,4 +22,3 @@ To deploy this project run
 ```bash
   npm run dev
 ```
-
