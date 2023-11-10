@@ -1,7 +1,16 @@
 
 # UniCafe
 
-React application to count good, neutral and bad comments. It also displays the statistics.
+React application to count good, neutral and bad feedbacks.
+
+If any type of feedback is coutned then display the following statistics:
+
+* Count of good feedbaks
+* Count of neutral feedbaks
+* Count of bad feedbaks
+* Total feedback count
+* Weighted average (Good: 1, Neutral: 0, Bad: -1)
+* Positive percetage
 
 The project was build with:
 
