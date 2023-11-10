@@ -1,6 +1,14 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const Button = ({name, funcionHandler}) => {
+  return <button onClick={funcionHandler}>{name}</button>
+}
+
+const StatisticLine = ({name, value}) => {
+  return <p>{name} {value}</p>
+}
+
 const Statistics = ({good, neutral, bad}) => {
   const total = good + neutral + bad;
 
@@ -8,12 +16,12 @@ const Statistics = ({good, neutral, bad}) => {
 
   return (
     <>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {total}</p>
-      <p>average {(good*1 + neutral*0 + bad*-1)/total}</p>
-      <p>positive {good/total*100} %</p>
+      <StatisticLine name={'good'} value={good}/>
+      <StatisticLine name={'neutral'} value={neutral}/>
+      <StatisticLine name={'bad'} value={bad}/>
+      <StatisticLine name={'all'} value={total}/>
+      <StatisticLine name={'average'} value={(good*1 + neutral*0 + bad*-1)/total}/>
+      <StatisticLine name={'positive'} value={good/total*100}/>
     </>
   );
 }
@@ -27,9 +35,9 @@ const App = () => {
   return (
     <div>
       <h2>Give feedback</h2>
-      <button>Good</button>
-      <button>Neutral</button>
-      <button>Bad</button>
+      <Button name='Good' funcionHandler={() => {setGood(good + 1)}}/>
+      <Button name='Neutral' funcionHandler={() => {setNeutral(neutral + 1)}}/>
+      <Button name='Bad' funcionHandler={() => {setBad(bad + 1)}}/>
       <h2>Statistics</h2>
       <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
