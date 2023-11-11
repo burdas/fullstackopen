@@ -14,3 +14,11 @@
     b. JavaScript
     c. Estado del componente, controladores de eventos
     d. Un estado mas complejo, depurando aplicaciones de React
+
+### [Part 2 - Comunicandose con el servidor](https://fullstackopen.com/es/part2)
+
+    a. Renderizando una colección, módulos
+    b. Formularios
+    c. Obteniendo datos del servidor
+    d. Alterando datos en el servidor
+    e. Agregar estilos a la aplicación React
