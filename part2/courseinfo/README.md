@@ -1,7 +1,11 @@
 
 # Course info
 
-A litte React exercise with a example to use Componentes and Props.
+Aplication about courses, parts and exercises getting by object variable
+
+* The aplication shows all courses data independent of the number of courses
+* The aplication shows all parts of the course independent of the number of parts
+* The aplicacion shows the total amount of exercises independet of the number of parts
 
 The project was build with:
 
