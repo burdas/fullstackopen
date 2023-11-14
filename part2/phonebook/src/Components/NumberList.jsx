@@ -6,7 +6,7 @@ export const NumbersList = ({ persons }) => {
             <h2>Numbers</h2>
             <ul>
                 {persons.map(person => (
-                    <NumbersListItems key={person.name} name={person.name} />
+                    <NumbersListItems key={person.name} name={person.name} number={person.number} />
                 ))}
             </ul>
         </>

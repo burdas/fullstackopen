@@ -1,5 +1,5 @@
-export const NumbersListItems = ({ name }) => {
+export const NumbersListItems = ({ name, number }) => {
     return (
-        <li>{name}</li>
+        <li>{name} {number}</li>
     )
 }
