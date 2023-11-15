@@ -22,7 +22,7 @@ function App() {
   return (
     <>
       <Filter filter={filter} onChangeFilter={onChangeFilter}  />
-      <Content countries={countries} filter={filter} />
+      <Content countries={countries} filter={filter} setFilter={setFilter} />
     </>
   )
 }
