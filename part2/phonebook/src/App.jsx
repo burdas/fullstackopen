@@ -8,12 +8,14 @@ import {
   removePerson,
   updatePerson,
 } from "./Services/persons";
+import { Notification } from "./Components/Notificacion";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
+  const [notification, setNotification] = useState({message: null, mode: null});
 
   const personsFiltered = persons.filter((p) =>
     p.name.toUpperCase().includes(filter.toUpperCase())
@@ -95,6 +97,7 @@ const App = () => {
   return (
     <>
       <h1>Phonebook</h1>
+      <Notification message={notification.message} mode={notification.mode} />
       <Filter filterName={filter} handleFilterChange={onChangeFilter} />
       <NumberForm
         handleSubmit={addName}
