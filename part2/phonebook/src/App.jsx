@@ -50,9 +50,10 @@ const App = () => {
             );
             setNewName("");
             setNewNumber("");
+            showMessage(`Updated ${personUpdated.name}`, "success");
           })
-          .catch((error) => {
-            alert(`Unable to update a person. Error: ${error}`);
+          .catch(() => {
+            showMessage(`Unable to update a ${newName}`, "error");
           });
       }
     } else {
@@ -62,9 +63,10 @@ const App = () => {
           setPersons(persons.concat(responsePerson));
           setNewName("");
           setNewNumber("");
+          showMessage(`Added ${responsePerson.name}`, "success");
         })
-        .catch((error) => {
-          alert(`Unable to add a person. Error: ${error}`);
+        .catch(() => {
+          showMessage(`Unable to add a ${newPerson.name}`, "error");
         });
     }
   };
@@ -74,12 +76,21 @@ const App = () => {
       removePerson(personToRemove.id)
         .then(() => {
           console.log("Sucessfuly deleted");
+          showMessage(`Deleted ${personToRemove.name}`, "success");
           setPersons(persons.filter((p) => p.id !== personToRemove.id));
         })
         .catch((error) => {
-          alert(`Unable to remove a person. Error: ${error}`);
+          showMessage(`Information of ${personToRemove.name} has already been removed from server`, "error");
+          console.log(error)
         });
     }
+  };
+
+  const showMessage = (message, mode) => {
+    setNotification({message: message, mode: mode});
+    setTimeout(() => {
+      setNotification({message: null, mode: null});
+    }, 3000);
   };
 
   const onChangeName = (event) => {
