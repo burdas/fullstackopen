@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import { NumbersList } from "./Components/NumberList";
 import { NumberForm } from "./Components/NumberForm";
 import { Filter } from "./Components/Filter";
-import { getAllPeople, createPerson, removePerson } from "./Services/persons";
+import {
+  getAllPeople,
+  createPerson,
+  removePerson,
+  updatePerson,
+} from "./Services/persons";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -26,8 +31,28 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault();
-    if (persons.find((p) => p.name === newName)) {
-      alert(`${newName} is already added to phonebook`);
+    const findPerson = persons.find((p) => p.name === newName);
+    if (findPerson) {
+      if (
+        confirm(
+          `${newName} is already added to phonebook, replace the old number with the new one?`
+        )
+      ) {
+        const replacePerson = { ...findPerson, number: newNumber };
+        updatePerson(findPerson.id, replacePerson)
+          .then((personUpdated) => {
+            setPersons(
+              persons.map((p) =>
+                p.id !== personUpdated.id ? p : personUpdated
+              )
+            );
+            setNewName("");
+            setNewNumber("");
+          })
+          .catch((error) => {
+            alert(`Unable to update a person. Error: ${error}`);
+          });
+      }
     } else {
       const newPerson = { name: newName, number: newNumber };
       createPerson(newPerson)
