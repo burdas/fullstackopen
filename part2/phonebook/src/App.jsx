@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NumbersList } from "./Components/NumberList";
 import { NumberForm } from "./Components/NumberForm";
 import { Filter } from "./Components/Filter";
-import axios from "axios";
+import { getAllPeople, createPerson } from "./Services/persons";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -11,9 +11,13 @@ const App = () => {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
-      setPersons(response.data);
-    });
+    getAllPeople()
+      .then((response) => {
+        setPersons(response);
+      })
+      .catch((error) => {
+        alert(`Unable tu load people. Error: ${error}`);
+      });
   }, []);
 
   const addName = (event) => {
@@ -21,11 +25,16 @@ const App = () => {
     if (persons.find((p) => p.name === newName)) {
       alert(`${newName} is already added to phonebook`);
     } else {
-      setPersons(
-        persons.concat({id: persons.length+1 , name: newName, number: newNumber })
-      );
-      setNewName("");
-      setNewNumber("");
+      const newPerson = { name: newName, number: newNumber };
+      createPerson(newPerson)
+        .then((responsePerson) => {
+          setPersons(persons.concat(responsePerson));
+          setNewName("");
+          setNewNumber("");
+        })
+        .catch((error) => {
+          alert(`Unable to add a person. Error: ${error}`);
+        });
     }
   };
 
