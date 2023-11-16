@@ -8,7 +8,8 @@ This application implements a web phonebook.
 * The application shows the list of the added names and numbers
 * The application allows to filter the list by a name
 
-* (LAST) The application get data from the server
+* (LAST) The application get, post, putm and delete data from the server
+* (LAST) The application shows a notification with success or error
 
 The project was build with:
 
