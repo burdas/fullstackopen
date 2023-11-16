@@ -1,22 +1,15 @@
 import { NumbersListItems } from "./NumbersListItem";
 
-export const NumbersList = ({ persons, filter }) => {
-  const personAux =
-    filter !== ""
-      ? persons.filter((p) =>
-          p.name.toUpperCase().includes(filter.toUpperCase())
-        )
-      : persons;
-
+export const NumbersList = ({ persons, onClickRemovePerson }) => {
   return (
     <>
       <h2>Numbers</h2>
       <ul>
-        {personAux.map((person) => (
+        {persons.map((person) => (
           <NumbersListItems
             key={person.id}
-            name={person.name}
-            number={person.number}
+            person={person}
+            onClickRemovePerson={onClickRemovePerson}
           />
         ))}
       </ul>

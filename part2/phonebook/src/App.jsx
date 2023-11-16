@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import { NumbersList } from "./Components/NumberList";
 import { NumberForm } from "./Components/NumberForm";
 import { Filter } from "./Components/Filter";
-import { getAllPeople, createPerson } from "./Services/persons";
+import { getAllPeople, createPerson, removePerson } from "./Services/persons";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
+
+  const personsFiltered = persons.filter((p) =>
+    p.name.toUpperCase().includes(filter.toUpperCase())
+  );
 
   useEffect(() => {
     getAllPeople()
@@ -38,6 +42,19 @@ const App = () => {
     }
   };
 
+  const onClickRemovePerson = (personToRemove) => () => {
+    if (confirm(`Delete ${personToRemove.name}?`)) {
+      removePerson(personToRemove.id)
+        .then(() => {
+          console.log("Sucessfuly deleted");
+          setPersons(persons.filter((p) => p.id !== personToRemove.id));
+        })
+        .catch((error) => {
+          alert(`Unable to remove a person. Error: ${error}`);
+        });
+    }
+  };
+
   const onChangeName = (event) => {
     setNewName(event.target.value);
   };
@@ -61,7 +78,10 @@ const App = () => {
         newName={newName}
         newNumber={newNumber}
       />
-      <NumbersList persons={persons} filter={filter} />
+      <NumbersList
+        persons={personsFiltered}
+        onClickRemovePerson={onClickRemovePerson}
+      />
     </>
   );
 };
