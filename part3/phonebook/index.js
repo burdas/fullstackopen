@@ -47,9 +47,21 @@ app.get("/api/persons/:id", (request, response) => {
 
 app.delete("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
-  persons = persons.filter(p => p.id !== id);
+  persons = persons.filter((p) => p.id !== id);
 
   response.status(204).end();
+});
+
+app.use(express.json())
+
+app.post("/api/persons", (request, response) => {
+  let person = request.body;
+  // Random number between 0 and Number.MAX_SAFE_INTEGER 
+  person = {...person, id: Math.floor(Math.random()*Number.MAX_SAFE_INTEGER)};
+
+  persons = persons.concat(person);
+
+  response.json(person);
 });
 
 const PORT = 3001;
