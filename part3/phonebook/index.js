@@ -52,12 +52,29 @@ app.delete("/api/persons/:id", (request, response) => {
   response.status(204).end();
 });
 
-app.use(express.json())
+app.use(express.json());
 
 app.post("/api/persons", (request, response) => {
   let person = request.body;
-  // Random number between 0 and Number.MAX_SAFE_INTEGER 
-  person = {...person, id: Math.floor(Math.random()*Number.MAX_SAFE_INTEGER)};
+
+  const errorMessage = !person.name
+    ? "name missing"
+    : !person.number
+    ? "number missing"
+    : persons.find((p) => p.name === person.name)
+    ? "name must be unique"
+    : null;
+  if (errorMessage) {
+    return response.status(400).json({
+      error: errorMessage,
+    });
+  }
+
+  // Random number between 0 and Number.MAX_SAFE_INTEGER
+  person = {
+    ...person,
+    id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+  };
 
   persons = persons.concat(person);
 
