@@ -1,0 +1,15 @@
+{
+  "name": "command_db",
+  "version": "1.0.0",
+  "description": "A simple command app to connect to mongodb",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo No hay pruebas todavía"
+  },
+  "author": "Marcos Burdaspar",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^8.0.1"
+  }
+}
