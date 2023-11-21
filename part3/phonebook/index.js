@@ -1,7 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require('cors')
+require('dotenv').config();
 const app = express();
+const Person = require('./models/person');
 
 app.use(express.static('dist'))
 app.use(cors())
@@ -40,7 +42,9 @@ let persons = [
 ];
 
 app.get("/api/persons", (_, response) => {
-  response.json(persons);
+  Person.find({}).then(notes => {
+    response.json(notes)
+  })
 });
 
 app.get("/info", (_, response) => {
@@ -96,7 +100,9 @@ app.post("/api/persons", (request, response) => {
   response.json(person);
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+module.exports = mongoose.model('Person', personSchema)
