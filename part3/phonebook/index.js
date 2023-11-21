@@ -42,8 +42,10 @@ let persons = [
 ];
 
 app.get("/api/persons", (_, response) => {
-  Person.find({}).then(notes => {
-    response.json(notes)
+  Person.find({}).then(persons => {
+    const personAux = persons.map(p => p.toJSON());
+    console.log(personAux);
+    response.json(personAux)
   })
 });
 
@@ -95,14 +97,14 @@ app.post("/api/persons", (request, response) => {
     id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
   };
 
-  persons = persons.concat(person);
-
-  response.json(person);
+  //persons = persons.concat(person);
+  const personDB = new Person(person);
+  personDB.save().then(savedPerson => {
+    response.json(savedPerson);
+  });
 });
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-module.exports = mongoose.model('Person', personSchema)
