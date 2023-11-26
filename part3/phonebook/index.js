@@ -46,10 +46,10 @@ let persons = [
 ];
 
 app.get("/api/persons", (_, response) => {
-  Person.find({}).then((persons) => {
-    const personAux = persons.map((p) => p.toJSON());
-    response.json(personAux);
-  });
+  Person.find({}).then(persons => {
+    const personAux = persons.map(p => p.toJSON());
+    response.json(personAux)
+  })
 });
 
 app.get("/info", (_, response) => {
@@ -72,9 +72,12 @@ app.get("/api/persons/:id", (request, response, next) => {
 
 app.delete("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
-  persons = persons.filter((p) => p.id !== id);
-
-  response.status(204).end();
+  //persons = persons.filter((p) => p.id !== id);
+  Person.findByIdAndDelete(request.params.id)
+    .then(result => {
+      response.status(204).end()
+    })
+    .catch(error => next(error))
 });
 
 app.use(express.json());
