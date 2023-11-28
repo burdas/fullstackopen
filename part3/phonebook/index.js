@@ -46,10 +46,10 @@ let persons = [
 ];
 
 app.get("/api/persons", (_, response) => {
-  Person.find({}).then(persons => {
-    const personAux = persons.map(p => p.toJSON());
-    response.json(personAux)
-  })
+  Person.find({}).then((persons) => {
+    const personAux = persons.map((p) => p.toJSON());
+    response.json(personAux);
+  });
 });
 
 app.get("/info", (_, response) => {
@@ -74,15 +74,15 @@ app.delete("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
   //persons = persons.filter((p) => p.id !== id);
   Person.findByIdAndDelete(request.params.id)
-    .then(result => {
-      response.status(204).end()
+    .then((result) => {
+      response.status(204).end();
     })
-    .catch(error => next(error))
+    .catch((error) => next(error));
 });
 
 app.use(express.json());
 
-app.post("/api/persons", (request, response) => {
+app.post("/api/persons", (request, response, next) => {
   let person = request.body;
 
   const errorMessage = !person.name
@@ -106,9 +106,13 @@ app.post("/api/persons", (request, response) => {
 
   //persons = persons.concat(person);
   const personDB = new Person(person);
-  personDB.save().then((savedPerson) => {
-    response.json(savedPerson);
-  });
+  personDB
+    .save()
+    .then((savedPerson) => savedPerson.toJSON())
+    .then((savedAndFormattedPerson) => {
+      response.json(savedAndFormattedPerson);
+    })
+    .catch((error) => next(error));
 });
 
 app.put("/api/persons/:id", (request, response, next) => {
