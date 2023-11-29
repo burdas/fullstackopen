@@ -65,8 +65,8 @@ const App = () => {
           setNewNumber("");
           showMessage(`Added ${responsePerson.name}`, "success");
         })
-        .catch(() => {
-          showMessage(`Unable to add a ${newPerson.name}`, "error");
+        .catch((error) => {
+          showMessage(error.response.data.error, "error");
         });
     }
   };
