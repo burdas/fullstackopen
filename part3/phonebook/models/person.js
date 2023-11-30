@@ -1,17 +1,19 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
+/* eslint-disable linebreak-style */
+/* eslint-disable no-undef */
+require('dotenv').config()
+const mongoose = require('mongoose')
 
-const url = process.env.MONGO_URL; // Name from railway
-console.log("connecting to", url);
+const url = process.env.MONGO_URL // Name from railway
+console.log('connecting to', url)
 
 mongoose
   .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log("connected to MongoDB");
+    console.log('connected to MongoDB')
   })
   .catch((error) => {
-    console.log("error connecting to MongoDB:", error.message);
-  });
+    console.log('error connecting to MongoDB:', error.message)
+  })
 
 const personSchema = new mongoose.Schema({
   name: {
@@ -25,14 +27,14 @@ const personSchema = new mongoose.Schema({
     minlength: 8,
     required: true
   }
-});
+})
 
-personSchema.set("toJSON", {
+personSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
   },
-});
+})
 
-module.exports = mongoose.model('Person', personSchema);
+module.exports = mongoose.model('Person', personSchema)
