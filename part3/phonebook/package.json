@@ -7,7 +7,8 @@
     "build:ui": "rd /s/q dist || cd ./../../part2/phonebook && npm run build && cd ./../../part3/phonebook && xcopy \"./../../part2/phonebook/dist\" \"./dist\" /E /H /C /I",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "test"
+    "test": "test",
+    "lint": "eslint ."
   },
   "proxy": "http://localhost:3001",
   "author": "Marcos Burdaspar",
@@ -20,6 +21,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "eslint": "^8.54.0",
     "nodemon": "^3.0.1"
   }
 }
